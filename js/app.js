@@ -15,24 +15,47 @@ const AppState = {
   editingCell: null // { day, period, classId }
 };
 
-// تهيئة البيانات من التخزين المحلي أو من البيانات الافتراضية
+// إصدار البيانات لضمان تحديث الذاكرة المحلية تلقائياً عند تغيير الملفات
+const CURRENT_DATA_VERSION = '2025_2026_v3';
+
+// تهيئة البيانات من التخزين المحلي أو من البيانات الافتراضية المعتمدة
 function initData() {
+  const savedVersion = localStorage.getItem('zattari_data_version');
   const saved = localStorage.getItem('zattari_timetable_data');
-  if (saved) {
+
+  if (saved && savedVersion === CURRENT_DATA_VERSION) {
     try {
       AppState.timetableData = JSON.parse(saved);
+      return;
     } catch (e) {
-      console.error('فشل استعادة البيانات المحفوظة، سيتم استخدام البيانات الأصلية', e);
-      AppState.timetableData = JSON.parse(JSON.stringify(DEFAULT_TIMETABLE_DATA));
+      console.error('فشل استعادة البيانات المحفوظة، سيتم استخدام البيانات المعتمدة', e);
     }
-  } else {
-    AppState.timetableData = JSON.parse(JSON.stringify(DEFAULT_TIMETABLE_DATA));
   }
+
+  // تحديث تلقائي للبيانات المعتمدة الجديدة
+  AppState.timetableData = JSON.parse(JSON.stringify(DEFAULT_TIMETABLE_DATA));
+  localStorage.setItem('zattari_timetable_data', JSON.stringify(AppState.timetableData));
+  localStorage.setItem('zattari_data_version', CURRENT_DATA_VERSION);
 }
 
-// حفظ البيانات في التخزين المحلي
+// حفظ البيانات في التخزين المحلي وحفظها على القرص مباشرة
 function persistData() {
   localStorage.setItem('zattari_timetable_data', JSON.stringify(AppState.timetableData));
+  localStorage.setItem('zattari_data_version', CURRENT_DATA_VERSION);
+  saveToServer(AppState.timetableData);
+}
+
+// حفظ مباشر في ملف المشروع على القرص عند تشغيل الخادم المحلي
+function saveToServer(data) {
+  fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(res => {
+    if (res.ok) console.log('تم حفظ التعديل مباشرة على ملفات المشروع في القرص الصلب.');
+  }).catch(() => {
+    // في حال العمل بصفحة عادية بدون خادم محلي
+  });
 }
 
 // تصدير نسخة احتياطية من الجدول
