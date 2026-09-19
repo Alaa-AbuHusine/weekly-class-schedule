@@ -35,14 +35,27 @@ function persistData() {
   localStorage.setItem('zattari_timetable_data', JSON.stringify(AppState.timetableData));
 }
 
+// تصدير نسخة احتياطية من الجدول
+function exportTimetableData() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(AppState.timetableData, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", "جدول_مدرسة_الزعتري_المعدل.json");
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+  showToast('تم تصدير وحفظ نسخة الجدول بنجاح!');
+}
+
 // استعادة الجدول الأصلي
 function resetToDefaultData() {
-  if (confirm('هل أنت متأكد من رغبتك في استعادة الجدول الأصلي وإلغاء التعديلات اليدوية؟')) {
+  if (confirm('هل أنت متأكد من رغبتك في استعادة الجدول الأساسي المعتمد؟')) {
     AppState.timetableData = JSON.parse(JSON.stringify(DEFAULT_TIMETABLE_DATA));
     persistData();
     populateTeacherFilter();
+    updateConflictStatus();
     renderApp();
-    showToast('تمت استعادة الجدول الأصلي بنجاح!');
+    showToast('تمت استعادة الجدول الأساسي بنجاح!');
   }
 }
 
