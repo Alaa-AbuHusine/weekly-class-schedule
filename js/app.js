@@ -16,7 +16,7 @@ const AppState = {
 };
 
 // إصدار البيانات لضمان تحديث الذاكرة المحلية تلقائياً عند تغيير الملفات
-const CURRENT_DATA_VERSION = '2025_2026_v3';
+const CURRENT_DATA_VERSION = '2025_2026_v4';
 
 // تهيئة البيانات من التخزين المحلي أو من البيانات الافتراضية المعتمدة
 function initData() {
@@ -677,6 +677,17 @@ function updateHeaderBanners(title, subtitle) {
 // دالة العرض الرئيسية
 function renderApp() {
   updateConflictStatus();
+
+  // ضبط ظهور مؤشر التمرير الأفقي حسب نمط العرض
+  const swipeHint = document.getElementById('swipeHint');
+  if (swipeHint) {
+    if (AppState.viewMode === 'cards' || (AppState.selectedClass !== 'all') || (AppState.viewMode === 'teacher' && AppState.selectedTeacher !== 'all')) {
+      swipeHint.style.display = 'none';
+    } else {
+      swipeHint.style.display = '';
+    }
+  }
+
   if (AppState.viewMode === 'teacher' && AppState.selectedTeacher !== 'all') {
     renderTeacherView();
   } else if (AppState.viewMode === 'cards') {

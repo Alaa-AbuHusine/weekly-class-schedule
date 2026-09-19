@@ -80,7 +80,7 @@ const DEFAULT_TIMETABLE_DATA = {
     2: {
       '8a': { subject: 'عربي', teacher: 'يزيد' },
       '8b': { subject: 'دين', teacher: 'نايل' },
-      '8c': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8c': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8d': { subject: 'مالية', teacher: 'مالك صبيحات' },
       '9a': { subject: 'عربي', teacher: 'مؤمن' },
       '9b': { subject: 'جغرافيا', teacher: 'يوسف مدالله' },
@@ -93,7 +93,7 @@ const DEFAULT_TIMETABLE_DATA = {
     },
     3: {
       '8a': { subject: 'اجتماعيات', teacher: 'عمر فهد' },
-      '8b': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8b': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8c': { subject: 'عربي', teacher: 'يزيد' },
       '8d': { subject: 'اجتماعيات', teacher: 'يوسف مدالله' },
       '9a': { subject: 'علوم ارض', teacher: 'الشرعه' },
@@ -109,7 +109,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '8a': { subject: 'انجليزي', teacher: 'علاء' },
       '8b': { subject: 'عربي', teacher: 'يزيد' },
       '8c': { subject: 'حاسوب', teacher: 'يوسف النعيمي' },
-      '8d': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8d': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '9a': { subject: 'كيمياء', teacher: 'عليمات' },
       '9b': { subject: 'دين', teacher: 'نايل' },
       '9c': { subject: 'مهني', teacher: 'علي الفواعرة' },
@@ -120,7 +120,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '10c': { subject: 'علوم ارض', teacher: 'الشرعه' }
     },
     5: {
-      '8a': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8a': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8b': { subject: 'انجليزي', teacher: 'علاء' },
       '8c': { subject: 'اجتماعيات', teacher: 'يوسف مدالله' },
       '8d': { subject: 'عربي', teacher: 'يزيد' },
@@ -181,7 +181,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '8a': { subject: 'دين', teacher: 'نايل' },
       '8b': { subject: 'حاسوب', teacher: 'مالك صبيحات' },
       '8c': { subject: 'عربي', teacher: 'يزيد' },
-      '8d': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8d': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '9a': { subject: 'رياضيات', teacher: 'عبد الحميد' },
       '9b': { subject: 'تاريخ', teacher: 'عمر فهد' },
       '9c': { subject: 'دين', teacher: 'إبراهيم' },
@@ -192,7 +192,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '10c': { subject: 'احياء', teacher: 'الشرعه' }
     },
     3: {
-      '8a': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8a': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8b': { subject: 'عربي', teacher: 'يزيد' },
       '8c': { subject: 'دين', teacher: 'نايل' },
       '8d': { subject: 'علوم', teacher: 'الشرعه' },
@@ -221,7 +221,7 @@ const DEFAULT_TIMETABLE_DATA = {
     },
     5: {
       '8a': { subject: 'عربي', teacher: 'يزيد' },
-      '8b': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8b': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8c': { subject: 'انجليزي', teacher: 'علاء' },
       '8d': { subject: 'دين', teacher: 'نايل' },
       '9a': { subject: 'مهني', teacher: 'علي الفواعرة' },
@@ -236,7 +236,7 @@ const DEFAULT_TIMETABLE_DATA = {
     6: {
       '8a': { subject: 'انجليزي', teacher: 'علاء' },
       '8b': { subject: 'عربي', teacher: 'يزيد' },
-      '8c': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8c': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8d': { subject: 'رياضة', teacher: 'علي صبيحات' },
       '9a': { subject: 'عربي', teacher: 'مؤمن' },
       '9b': { subject: 'انجليزي', teacher: 'مروان' },
@@ -264,7 +264,7 @@ const DEFAULT_TIMETABLE_DATA = {
   },
   tuesday: {
     1: {
-      '8a': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8a': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8b': { subject: 'علوم', teacher: 'عليمات' },
       '8c': { subject: 'دين', teacher: 'نايل' },
       '8d': { subject: 'انجليزي', teacher: 'علاء' },
@@ -280,7 +280,7 @@ const DEFAULT_TIMETABLE_DATA = {
     2: {
       '8a': { subject: 'دين', teacher: 'نايل' },
       '8b': { subject: 'حاسوب', teacher: 'مالك صبيحات' },
-      '8c': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8c': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8d': { subject: 'عربي', teacher: 'يزيد' },
       '9a': { subject: 'رياضيات', teacher: 'عبد الحميد' },
       '9b': { subject: 'عربي', teacher: 'مؤمن' },
@@ -323,7 +323,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '8a': { subject: 'عربي', teacher: 'يزيد' },
       '8b': { subject: 'اجتماعيات', teacher: 'يوسف مدالله' },
       '8c': { subject: 'انجليزي', teacher: 'علاء' },
-      '8d': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8d': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '9a': { subject: 'انجليزي', teacher: 'مروان' },
       '9b': { subject: 'فيزياء', teacher: 'كرم' },
       '9c': { subject: 'دين', teacher: 'إبراهيم' },
@@ -349,7 +349,7 @@ const DEFAULT_TIMETABLE_DATA = {
     },
     7: {
       '8a': { subject: 'حاسوب', teacher: 'مالك صبيحات' },
-      '8b': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8b': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8c': { subject: 'مهني', teacher: 'علي الفواعرة' },
       '8d': null,
       '9a': null,
@@ -366,7 +366,7 @@ const DEFAULT_TIMETABLE_DATA = {
     1: {
       '8a': { subject: 'عربي', teacher: 'يزيد' },
       '8b': { subject: 'مالية', teacher: 'مالك صبيحات' },
-      '8c': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8c': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8d': { subject: 'حاسوب', teacher: 'يوسف النعيمي' },
       '9a': { subject: 'احياء', teacher: 'الشرعه' },
       '9b': { subject: 'فيزياء', teacher: 'كرم' },
@@ -378,7 +378,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '10c': { subject: 'جغرافيا', teacher: 'يوسف مدالله' }
     },
     2: {
-      '8a': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8a': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8b': { subject: 'مهني', teacher: 'علي الفواعرة' },
       '8c': { subject: 'اجتماعيات', teacher: 'يوسف مدالله' },
       '8d': { subject: 'دين', teacher: 'نايل' },
@@ -393,7 +393,7 @@ const DEFAULT_TIMETABLE_DATA = {
     },
     3: {
       '8a': { subject: 'علوم', teacher: 'كرم' },
-      '8b': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8b': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8c': { subject: 'مهني', teacher: 'علي الفواعرة' },
       '8d': { subject: 'انجليزي', teacher: 'علاء' },
       '9a': { subject: 'دين', teacher: 'نايل' },
@@ -423,7 +423,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '8a': { subject: 'انجليزي', teacher: 'علاء' },
       '8b': { subject: 'علوم', teacher: 'عليمات' },
       '8c': { subject: 'مالية', teacher: 'مالك صبيحات' },
-      '8d': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8d': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '9a': { subject: 'رياضيات', teacher: 'عبد الحميد' },
       '9b': { subject: 'انجليزي', teacher: 'مروان' },
       '9c': { subject: 'عربي', teacher: 'مؤمن' },
@@ -465,7 +465,7 @@ const DEFAULT_TIMETABLE_DATA = {
   thursday: {
     1: {
       '8a': { subject: 'مهني', teacher: 'علي الفواعرة' },
-      '8b': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8b': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8c': { subject: 'انجليزي', teacher: 'علاء' },
       '8d': { subject: 'دين', teacher: 'نايل' },
       '9a': { subject: 'عربي', teacher: 'مؤمن' },
@@ -480,7 +480,7 @@ const DEFAULT_TIMETABLE_DATA = {
     2: {
       '8a': { subject: 'دين', teacher: 'نايل' },
       '8b': { subject: 'انجليزي', teacher: 'علاء' },
-      '8c': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8c': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8d': { subject: 'عربي', teacher: 'يزيد' },
       '9a': { subject: 'جغرافيا', teacher: 'يوسف مدالله' },
       '9b': { subject: 'مهني', teacher: 'علي الفواعرة' },
@@ -506,7 +506,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '10c': { subject: 'عربي', teacher: 'عبد الرحيم' }
     },
     4: {
-      '8a': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8a': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '8b': { subject: 'اجتماعيات', teacher: 'يوسف مدالله' },
       '8c': { subject: 'علوم', teacher: 'عليمات' },
       '8d': { subject: 'انجليزي', teacher: 'علاء' },
@@ -523,7 +523,7 @@ const DEFAULT_TIMETABLE_DATA = {
       '8a': { subject: 'انجليزي', teacher: 'علاء' },
       '8b': { subject: 'علوم', teacher: 'عليمات' },
       '8c': { subject: 'عربي', teacher: 'يزيد' },
-      '8d': { subject: 'رياضيات', teacher: 'محمد اللحام' },
+      '8d': { subject: 'رياضيات', teacher: 'محمد اللاحم' },
       '9a': { subject: 'انجليزي', teacher: 'مروان' },
       '9b': { subject: 'عربي', teacher: 'مؤمن' },
       '9c': { subject: 'فيزياء', teacher: 'كرم' },

@@ -12,8 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- ملفات التنسيق -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/print.css">
+  <link rel="stylesheet" href="css/style.css?v=2025_2026_v4">
+  <link rel="stylesheet" href="css/print.css?v=2025_2026_v4">
 </head>
 <body>
 
@@ -75,20 +75,23 @@
           <span>طباعة عامة</span>
         </button>
 
-        <!-- تصدير وحفظ نسخة من الجدول -->
-        <button class="btn btn-secondary btn-icon" onclick="exportTimetableData()" title="تصدير وحفظ نسخة احتياطية من الجدول">
-          <span>💾</span>
-        </button>
+        <!-- مجموعة الأدوات السريعة (تصدير، استعادة، تبديل المظهر) -->
+        <div class="header-icon-group">
+          <!-- تصدير وحفظ نسخة من الجدول -->
+          <button class="btn btn-secondary btn-icon" onclick="exportTimetableData()" title="تصدير وحفظ نسخة احتياطية من الجدول">
+            <span>💾</span>
+          </button>
 
-        <!-- استعادة الجدول الأصلي -->
-        <button class="btn btn-secondary btn-icon" onclick="resetToDefaultData()" title="استعادة الجدول الأساسي">
-          <span>🔄</span>
-        </button>
+          <!-- استعادة الجدول الأصلي -->
+          <button class="btn btn-secondary btn-icon" onclick="resetToDefaultData()" title="استعادة الجدول الأساسي">
+            <span>🔄</span>
+          </button>
 
-        <!-- تبديل الوضع الليلي والنهاري -->
-        <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="تبديل المظهر (ليلي / نهاري)">
-          <span id="themeIcon">🌙</span>
-        </button>
+          <!-- تبديل الوضع الليلي والنهاري -->
+          <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="تبديل المظهر (ليلي / نهاري)">
+            <span id="themeIcon">🌙</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -157,6 +160,13 @@
           <span>الجدول نشط ومطابق للأصل</span>
         </span>
       </div>
+    </div>
+
+    <!-- مؤشر تمرير الجدول للشاشات الصغيرة والمتوسطة (يظهر تلقائياً على الهواتف والأجهزة اللوحية) -->
+    <div class="swipe-hint no-print" id="swipeHint">
+      <span class="swipe-hint-arrow">👉</span>
+      <span>اسحب الجدول أفقياً لعرض باقي الشعب والصفوف</span>
+      <span class="swipe-hint-arrow">👈</span>
     </div>
 
     <!-- 4. حاوية الجدول الدراسي الرئيسي (المفصول حسب اليوم المختار) -->
@@ -311,7 +321,7 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="editTeacherInput">اسم المعلم:</label>
-          <input type="text" id="editTeacherInput" class="form-control" placeholder="مثال: أ. محمد الملاحيم، أ. مالك صبيحات..." oninput="checkTeacherConflictLive()">
+          <input type="text" id="editTeacherInput" class="form-control" placeholder="مثال: أ. محمد اللاحم، أ. مالك صبيحات..." oninput="checkTeacherConflictLive()">
           <!-- تنبيه التعارض اللحظي أثناء الكتابة -->
           <div id="editConflictWarning" style="display: none; background: #fef2f2; border: 1.5px solid #ef4444; border-radius: 8px; padding: 8px 12px; margin-top: 8px; color: #b91c1c; font-size: 0.85rem; font-weight: 700;"></div>
         </div>
@@ -324,7 +334,7 @@
   </div>
 
   <!-- ملفات الجافاسكربت -->
-  <script src="js/timetable-data.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/timetable-data.js?v=2025_2026_v4"></script>
+  <script src="js/app.js?v=2025_2026_v4"></script>
 </body>
 </html>
