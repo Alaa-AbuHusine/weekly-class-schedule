@@ -1,0 +1,351 @@
+/* ==========================================================================
+   ملف أنماط الطباعة الرسمية الفاخرة (Zattari School Timetable Print Stylesheet)
+   مجهز خصيصاً للطباعة على ورق A4 بشكل رسمي وأنيق بنسبة 100%
+   ========================================================================== */
+
+/* إخفاء عناصر الطباعة أثناء تصفح الموقع العادي */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 6mm 6mm 6mm 6mm;
+  }
+
+  /* إجبار المتصفح على طباعة الألوان والخلفيات بدقة متناهية */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #0f172a !important;
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif !important;
+    font-size: 8.5pt !important;
+    line-height: 1.25 !important;
+    direction: rtl !important;
+    text-align: right !important;
+  }
+
+  /* إخفاء كافة عناصر التحكم والتنقل وأدوات الويب */
+  .app-header,
+  .day-navigation-card,
+  .toolbar-container,
+  .day-header-banner,
+  .banner-actions,
+  .modal-backdrop,
+  .app-footer,
+  .btn,
+  .no-print,
+  #appToast {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .main-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* ==========================================================================
+     الترويسة الرسمية الفاخرة للطباعة
+     ========================================================================== */
+  .print-only {
+    display: block !important;
+  }
+
+  .print-header-official {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 2.5px solid #1e3a8a !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .print-header-side {
+    font-size: 8pt !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    color: #1e293b !important;
+  }
+
+  .print-header-center {
+    text-align: center !important;
+  }
+
+  .print-header-center h1 {
+    font-size: 13pt !important;
+    font-weight: 900 !important;
+    margin-bottom: 3px !important;
+    color: #1e3a8a !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .print-header-center .print-day-badge {
+    display: inline-block !important;
+    font-size: 9.5pt !important;
+    font-weight: 800 !important;
+    padding: 2px 16px !important;
+    background-color: #1e3a8a !important;
+    color: #ffffff !important;
+    border-radius: 4px !important;
+  }
+
+  /* ==========================================================================
+     تنسيق الجدول للطباعة A4 بالعرض (Landscape)
+     ========================================================================== */
+  .timetable-wrapper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  .table-scroll-container {
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  .timetable-grid {
+    width: 100% !important;
+    min-width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* رؤوس الأعمدة */
+  .timetable-grid thead th {
+    background-color: #1e3a8a !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 8.5pt !important;
+    padding: 6px 2px !important;
+    border: 1px solid #1e3a8a !important;
+    text-align: center !important;
+    position: static !important;
+    white-space: nowrap !important;
+  }
+
+  .timetable-grid thead th.col-period {
+    width: 72px !important;
+    background-color: #0f172a !important;
+    border-color: #0f172a !important;
+  }
+
+  /* خلايا الجدول */
+  .timetable-grid td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 2.5px 2px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    height: 48px !important;
+  }
+
+  /* عمود الحصة والتوقيت */
+  .period-badge-cell {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    width: 72px !important;
+    position: static !important;
+    box-shadow: none !important;
+  }
+
+  .period-num {
+    font-size: 9.5pt !important;
+    color: #1e3a8a !important;
+    font-weight: 900 !important;
+    display: block !important;
+  }
+
+  .period-time {
+    font-size: 6.8pt !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    direction: ltr !important;
+    display: block !important;
+  }
+
+  /* ==========================================================================
+     بطاقة الحصة المطبوعة (تصميم أنيق ومريح للألوان)
+     ========================================================================== */
+  .lesson-card {
+    border-radius: 4px !important;
+    padding: 2.5px 1px !important;
+    min-height: 42px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: none !important;
+    transform: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    page-break-inside: avoid !important;
+  }
+
+  .lesson-card .subject-name {
+    font-size: 8.8pt !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    margin-bottom: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+  }
+
+  .lesson-card .subject-name span.subject-icon {
+    display: none !important; /* إخفاء الإيموجي في الطباعة لتبقى رسمية */
+  }
+
+  .lesson-card .teacher-name {
+    font-size: 7.8pt !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+  }
+
+  .lesson-card.empty-lesson {
+    border: 1px dashed #cbd5e1 !important;
+    background: #f8fafc !important;
+    color: #94a3b8 !important;
+    font-size: 7.5pt !important;
+  }
+
+  /* ==========================================================================
+     تذييل التواقيع المدرسية الرسمية
+     ========================================================================== */
+  .print-footer-signatures {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    margin-top: 10px !important;
+    padding-top: 8px !important;
+    border-top: 1.5px solid #cbd5e1 !important;
+    page-break-inside: avoid !important;
+  }
+
+  .signature-box {
+    text-align: center !important;
+    font-size: 8.5pt !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+  }
+
+  .signature-line {
+    margin-top: 24px !important;
+    border-top: 1.2px dotted #475569 !important;
+    width: 150px !important;
+  }
+
+  /* طباعة جدول المعلم إن كان نشطاً */
+  .teacher-view-container {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .teacher-profile-bar {
+    background: #f8fafc !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .teacher-avatar {
+    display: none !important;
+  }
+
+  .teacher-profile-bar h2 {
+    font-size: 12pt !important;
+    font-weight: 900 !important;
+    color: #1e3a8a !important;
+    margin: 0 0 2px 0 !important;
+  }
+
+  .teacher-profile-bar p {
+    color: #334155 !important;
+    font-size: 8pt !important;
+    margin: 0 !important;
+    font-weight: 700 !important;
+  }
+
+  .teacher-stats {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+
+  .teacher-stats .btn {
+    display: none !important;
+  }
+
+  .stat-pill {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 2.5px 8px !important;
+    font-size: 8pt !important;
+    color: #1e293b !important;
+    font-weight: 700 !important;
+  }
+
+  .stat-pill strong {
+    color: #1e3a8a !important;
+  }
+
+  .period-off-cell {
+    background: #f8fafc !important;
+    color: #94a3b8 !important;
+    font-size: 8pt !important;
+  }
+
+  .teacher-schedule-class {
+    color: #1e3a8a !important;
+    font-weight: 800 !important;
+    font-size: 8pt !important;
+  }
+
+  /* إخفاء شارات التعارض في الطباعة الرسمية للجمالية */
+  .conflict-warning-pill {
+    display: none !important;
+  }
+
+  .lesson-card.is-conflict {
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    box-shadow: none !important;
+    background-color: #fff !important;
+  }
+}
+

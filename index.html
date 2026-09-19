@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="نظام الجدول المدرسي الذكي لمدرسة مخيم الزعتري الأساسية الثانية للبنين - عرض الحصص مفصلة لكل يوم بشكل مستقل مع إمكانية الطباعة الرسمية للجدول اليومي والأسبوعي وجداول المعلمين وفحص التعارضات">
+  <title>نظام الجدول المدرسي الذكي | مدرسة مخيم الزعتري الأساسية الثانية للبنين</title>
+
+  <!-- الخطوط العربية الحديثة (Cairo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- ملفات التنسيق -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       الترويسة الرسمية المخصصة للطباعة فقط (A4 Print Header)
+       ===================================================================== -->
+  <header class="print-only">
+    <div class="print-header-official">
+      <div class="print-header-side">
+        <div>المملكة الأردنية الهاشمية</div>
+        <div>وزارة التربية والتعليم</div>
+        <div>مديرية التربية والتعليم</div>
+        <div>مدرسة مخيم الزعتري الأساسية الثانية للبنين</div>
+      </div>
+      <div class="print-header-center">
+        <h1>البرنامج الأسبوعي لتوزيع الحصص المدرسية</h1>
+        <div class="print-day-badge" id="printDayName">جدول حصص يوم الأحد</div>
+      </div>
+      <div class="print-header-side" style="text-align: left;">
+        <div>العام الدراسي: 2025 / 2026</div>
+        <div>تاريخ الطباعة: <span id="printCurrentDate"></span></div>
+        <div>نظام التوقيت: الدوام المسائي</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       الهيدر التفاعلي للموقع (Web App Header)
+       ===================================================================== -->
+  <header class="app-header no-print">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo">🏫</div>
+        <div class="brand-titles">
+          <h1>
+            مدرسة مخيم الزعتري الأساسية الثانية للبنين
+            <span class="brand-badge">الجدول الدراسي الذكي</span>
+          </h1>
+          <p class="brand-subtitle">نظام توزيع الحصص اليومية والفصول الدراسية للعام الدراسي 2025 / 2026 (الدوام المسائي)</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- زر الطباعة الرئيسي المباشر لجدول اليوم -->
+        <button class="btn btn-print" id="mainPrintBtn" onclick="printCurrentDay()" title="طباعة جدول اليوم المحدد بضغطة واحدة">
+          <span>🖨️</span>
+          <span>طباعة جدول اليوم</span>
+        </button>
+
+        <!-- زر مخصص لطباعة جدول معلم محدد منفصلاً -->
+        <button class="btn btn-secondary" onclick="openTeacherPrintModal()" title="إذا كان هناك معلم يريد جدوله لحال لطباعته">
+          <span>👨‍🏫</span>
+          <span>طباعة جدول معلم</span>
+        </button>
+
+        <!-- زر خيارات الطباعة المتقدمة -->
+        <button class="btn btn-secondary" onclick="openPrintModal()" title="خيارات طباعة إضافية">
+          <span>📑</span>
+          <span>طباعة عامة</span>
+        </button>
+
+        <!-- استعادة الجدول الأصلي -->
+        <button class="btn btn-secondary btn-icon" onclick="resetToDefaultData()" title="استعادة الجدول الأصلي">
+          <span>🔄</span>
+        </button>
+
+        <!-- تبديل الوضع الليلي والنهاري -->
+        <button class="btn btn-secondary btn-icon" onclick="toggleTheme()" title="تبديل المظهر (ليلي / نهاري)">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       المحتوى الرئيسي (Main Application Content)
+       ===================================================================== -->
+  <main class="main-content">
+
+    <!-- 1. شريط تبويبات الأيام (فصل الجدول كل يوم لحال) -->
+    <nav class="day-navigation-card no-print" aria-label="شريط اختيار الأيام">
+      <ul class="day-tabs" id="dayTabs">
+        <!-- يتم توليد الأيام عبر JavaScript -->
+      </ul>
+    </nav>
+
+    <!-- 2. شريط الأدوات والفلترة والبحث وفحص التعارضات -->
+    <section class="toolbar-container no-print">
+      <div class="toolbar-group">
+        <!-- البحث السريع الحي -->
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن مادة، معلم، أو صف..." autocomplete="off">
+        </div>
+
+        <!-- تصفية حسب الصف -->
+        <select id="classFilterSelect" class="select-filter" aria-label="تصفية حسب الصف">
+          <option value="all">جميع الصفوف والشعب</option>
+        </select>
+
+        <!-- تصفية حسب المعلم -->
+        <select id="teacherFilterSelect" class="select-filter" aria-label="تصفية حسب المعلم">
+          <option value="all">جميع المعلمين</option>
+        </select>
+
+        <!-- زر كشف التعارضات التفاعلي -->
+        <button class="btn-conflict-check" id="conflictBtn" onclick="openConflictsModal()" title="فحص وجود أي تعارض في الحصص أو بين المعلمين">
+          <span id="conflictIcon">⚠️</span>
+          <span id="conflictStatusText">جاري فحص التعارضات...</span>
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <!-- تبديل طريقة العرض (جدول / بطاقات) -->
+        <div class="view-mode-toggle">
+          <button class="view-btn active" data-mode="grid" title="عرض جدول شبكي تقليدي">
+            <span>📊</span> جدول
+          </button>
+          <button class="view-btn" data-mode="cards" title="عرض بطاقات الفصول">
+            <span>🃏</span> بطاقات
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. عنوان اليوم الحالي والبيانات الوصفية -->
+    <div class="day-header-banner no-print">
+      <div class="day-title-wrap">
+        <h2 id="currentDayTitle">جدول حصص يوم الأحد</h2>
+        <span class="day-period-count" id="currentDaySubtitle">7 حصص دراسية</span>
+      </div>
+
+      <div class="banner-actions">
+        <span class="quick-meta">
+          <span class="live-dot"></span>
+          <span>الجدول نشط ومطابق للأصل</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- 4. حاوية الجدول الدراسي الرئيسي (المفصول حسب اليوم المختار) -->
+    <div id="timetableContainer">
+      <!-- يتم حقن الجدول بواسطة JavaScript -->
+    </div>
+
+    <!-- =====================================================================
+         تذييل التواقيع الرسمي المخصص للطباعة فقط
+         ===================================================================== -->
+    <footer class="print-only">
+      <div class="print-footer-signatures">
+        <div class="signature-box">
+          <div>مسؤول برمجة الجدول:</div>
+          <div class="signature-line"></div>
+        </div>
+        <div class="signature-box">
+          <div>خاتم المدرسة الرسمي</div>
+          <div style="width: 80px; height: 50px; border: 1px dashed #777; margin: 10px auto 0 auto; border-radius: 4px;"></div>
+        </div>
+        <div class="signature-box">
+          <div>مدير المدرسة:</div>
+          <div class="signature-line"></div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- =====================================================================
+       تذييل الموقع (Web App Footer)
+       ===================================================================== -->
+  <footer class="app-footer no-print">
+    <div class="footer-content">
+      <div>
+        <strong>نظام الجدول المدرسي الذكي</strong> &copy; مدرسة مخيم الزعتري الأساسية الثانية للبنين - مفروز حسب الأيام ومجهز للطباعة الفورية مع كشف التعارضات.
+      </div>
+      <div class="footer-notes">
+        <span>💡 اضغط على أي حصة لتعديل المادة أو اسم المعلم يدوياً وفحص التعارض لحظياً.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       نافذة خيارات الطباعة المتقدمة (Print Modal)
+       ===================================================================== -->
+  <div class="modal-backdrop no-print" id="printModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><span>🖨️</span> خيارات الطباعة المدرسية المخصصة</h3>
+        <button class="modal-close-btn" onclick="closePrintModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.25rem;">
+          اختر نمط الجدول الذي ترغب بطباعته بصيغة ورقية A4 منسقة رسمياً:
+        </p>
+
+        <div class="print-options-grid">
+          <div class="print-option-card" onclick="closePrintModal(); printCurrentDay();">
+            <span class="print-option-icon">📅</span>
+            <div class="print-option-title">طباعة اليوم المعروض</div>
+            <div class="print-option-desc">طباعة جدول اليوم المحدد بكافة صفوفه وحصصه</div>
+          </div>
+
+          <div class="print-option-card" onclick="closePrintModal(); selectDay('all'); setTimeout(printCurrentDay, 200);">
+            <span class="print-option-icon">📑</span>
+            <div class="print-option-title">طباعة الأسبوع كاملاً</div>
+            <div class="print-option-desc">طباعة البرنامج الأسبوعي الشامل لكافة الأيام</div>
+          </div>
+
+          <div class="print-option-card" onclick="closePrintModal(); openTeacherPrintModal();">
+            <span class="print-option-icon">👨‍🏫</span>
+            <div class="print-option-title">طباعة جدول معلم منفصل</div>
+            <div class="print-option-desc">طباعة جدول أسبوعي مستقل خاص بمعلم محدد لتسليمه إياه</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closePrintModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       نافذة طباعة جدول معلم منفصل (Teacher Print Modal)
+       ===================================================================== -->
+  <div class="modal-backdrop no-print" id="teacherPrintModal">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3><span>👨‍🏫</span> طباعة جدول المعلم بشكل منفصل</h3>
+        <button class="modal-close-btn" onclick="closeTeacherPrintModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">اختر المعلم المراد طباعة جدوله الأسبوعي المستقل:</label>
+          <select id="teacherPrintSelect" class="form-control" onchange="previewTeacherScheduleForPrint(this.value)">
+            <!-- يعبأ تلقائياً -->
+          </select>
+        </div>
+
+        <div id="teacherPrintPreviewCard" style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem; margin-top: 1rem;">
+          <!-- تفاصيل المعلم ومعاينة جدوله وحصص الفراغ -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeTeacherPrintModal()">إلغاء</button>
+        <button class="btn btn-print" onclick="executeTeacherPrint()">
+          <span>🖨️</span>
+          <span>طباعة جدول هذا المعلم (A4)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       نافذة كشف وتفاصيل التعارضات (Conflicts Modal)
+       ===================================================================== -->
+  <div class="modal-backdrop no-print" id="conflictsModal">
+    <div class="modal-content" style="max-width: 700px;">
+      <div class="modal-header" style="background: #fef2f2; border-bottom-color: #fecaca;">
+        <h3 style="color: #991b1b;"><span id="conflictsModalIcon">⚠️</span> كشف تعارض الحصص والمعلمين</h3>
+        <button class="modal-close-btn" onclick="closeConflictsModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="conflictsModalSummary" style="margin-bottom: 1rem;">
+          <!-- ملخص التعارضات -->
+        </div>
+
+        <div id="conflictsListContainer" style="max-height: 380px; overflow-y: auto; padding-left: 4px;">
+          <!-- قائمة التعارضات المفصلة -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeConflictsModal()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       نافذة تعديل الحصة (Edit Lesson Modal)
+       ===================================================================== -->
+  <div class="modal-backdrop no-print" id="editLessonModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="editModalTitle"><span>✏️</span> تعديل الحصة</h3>
+        <button class="modal-close-btn" onclick="closeEditModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="editSubjectInput">اسم المادة:</label>
+          <input type="text" id="editSubjectInput" class="form-control" placeholder="مثال: رياضيات، عربي، إنجليزي...">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="editTeacherInput">اسم المعلم:</label>
+          <input type="text" id="editTeacherInput" class="form-control" placeholder="مثال: أ. محمد الملاحيم، أ. مالك صبيحات..." oninput="checkTeacherConflictLive()">
+          <!-- تنبيه التعارض اللحظي أثناء الكتابة -->
+          <div id="editConflictWarning" style="display: none; background: #fef2f2; border: 1.5px solid #ef4444; border-radius: 8px; padding: 8px 12px; margin-top: 8px; color: #b91c1c; font-size: 0.85rem; font-weight: 700;"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeEditModal()">إلغاء</button>
+        <button class="btn btn-primary" onclick="saveCellEdit()">حفظ التعديل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ملفات الجافاسكربت -->
+  <script src="js/timetable-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

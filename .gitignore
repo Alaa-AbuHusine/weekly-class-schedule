@@ -1,0 +1,13 @@
+# ملفات النظام المؤقتة
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# محررات الأكواد
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ملفات السجلات
+*.log
