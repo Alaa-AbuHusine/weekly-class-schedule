@@ -50,10 +50,27 @@ class TimetableHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
 
 import sys
+import socket
 sys.stdout.reconfigure(encoding='utf-8')
 
+def get_local_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        return "127.0.0.1"
+
 if __name__ == '__main__':
+    local_ip = get_local_ip()
     socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", PORT), TimetableHandler) as httpd:
-        print(f"Server running on http://localhost:{PORT}")
+        print("=" * 68)
+        print("🏫 نظام الجدول المدرسي الذكي - مدرسة مخيم الزعتري الأساسية الثانية للبنين")
+        print("-" * 68)
+        print(f"💻 للفتح على جهاز الكمبيوتر:     http://localhost:{PORT}/")
+        print(f"📱 للفتح على الهاتف (على نفس الشبكة): http://{local_ip}:{PORT}/")
+        print("=" * 68)
         httpd.serve_forever()
